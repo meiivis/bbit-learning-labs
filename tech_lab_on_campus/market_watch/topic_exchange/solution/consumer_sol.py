@@ -19,11 +19,10 @@ class mqConsumer(mqConsumerInterface):
         self.connection = pika.BlockingConnection(parameters=conParams)
         self.channel = self.connection.channel()
         #create queue
-        self.channel.queue_declare(queue=self.queue_name, exchange_type='topic')
-        routing_key = sys.argv[1] if len(sys.argv) > 2 else 'anonymous.info'
-        
+        self.channel.queue_declare(queue=self.queue_name)
+
         #create exchange
-        self.exchange = self.channel.exchange_declare(exchange=self.exchange_name)
+        self.exchange = self.channel.exchange_declare(exchange=self.exchange_name, exchange_type='topic')
         #bind queue
         self.channel.queue_bind(
             queue= self.queue_name,
