@@ -25,17 +25,11 @@ class mqProducer(mqProducerInterface):
 
     def publishOrder(self, message: str) -> None:
         # Publish a simple UTF-8 string message from the parameter.
+
         self.channel.basic_publish(exchange=self.mqexchange_name, routing_key=self.mqrouting_key, body=message)
+        print(f"[x] Sent '{message}' with routing key '{self.mqrouting_key}'")
         self.channel.close()
         self.connection.close()
-
-        # Create Appropiate Topic String
-
-        # Send serialized message or String
-
-        # Print Confirmation
-
-        # Close channel and connection
 
     #def __del__(self) -> None:
         
