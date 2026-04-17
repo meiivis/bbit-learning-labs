@@ -1,7 +1,7 @@
 
 import os 
 import pika
-import producer_interface as mqProducerInterface
+from producer_interface import mqProducerInterface 
 
 class mqProducer(mqProducerInterface):
     def __init__(self, routing_key: str, exchange_name: str) -> None:
@@ -24,7 +24,7 @@ class mqProducer(mqProducerInterface):
 
     def publishOrder(self, message: str) -> None:
         # Publish a simple UTF-8 string message from the parameter.
-        self.channel.basic_publish(exchange=self.mqexchange_name, routing=self.mqrouting_key, body=message)
+        self.channel.basic_publish(exchange=self.mqexchange_name, routing_key=self.mqrouting_key, body=message)
         self.channel.close()
         self.connection.close()
 
