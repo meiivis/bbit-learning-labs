@@ -1,5 +1,7 @@
 
-
+import os 
+import pika
+import producer_interface as mqProducerInterface
 
 class mqProducer(mqProducerInterface):
     def __init__(self, routing_key: str, exchange_name: str) -> None:
