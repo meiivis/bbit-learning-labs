@@ -4,13 +4,15 @@ import os
 import pika
 
 class mqConsumer(mqConsumerInterface):
-    def __init__(self, binding_key, exchange_name, queue_name):
+    def __init__(
+        self, binding_key: str, exchange_name: str, queue_name: str
+    ) -> None:
         self.binding_key = binding_key
         self.exchange_name = exchange_name
         self.queue_name = queue_name
 
         self.setupRMQConnection()
-    def setupRMQConnection(self):
+    def setupRMQConnection(self) -> None:
 
         #connections
         conParams = pika.URLParameters(os.environ['AMQP_URL'])
@@ -19,7 +21,7 @@ class mqConsumer(mqConsumerInterface):
         #create queue
         self.channel.queue_declare(queue=self.queue_name)
         #create exchange
-        self.exchange = self.channel.exchange_declare(exchange="Exchange Name")
+        self.exchange = self.channel.exchange_declare(exchange=self.exchange_name)
         #bind queue
         self.channel.queue_bind(
             queue= self.queue_name,
