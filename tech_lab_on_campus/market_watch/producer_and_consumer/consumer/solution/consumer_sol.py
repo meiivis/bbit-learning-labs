@@ -25,7 +25,7 @@ class mqConsumer(mqConsumerInterface):
         #bind queue
         self.channel.queue_bind(
             queue= self.queue_name,
-            routing_key= self.routing_key,
+            routing_key= self.binding_key,
             exchange=self.exchange_name,
         )
         self.channel.basic_consume(
@@ -38,7 +38,7 @@ class mqConsumer(mqConsumerInterface):
     ) -> None:
         
         self.channel.basic_ack(method_frame.delivery_tag, False)
-        print('The message is contained in the body parameter variable')
+        print(body)
         
     
 
